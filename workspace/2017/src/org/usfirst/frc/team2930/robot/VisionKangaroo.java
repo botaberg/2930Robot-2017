@@ -27,11 +27,20 @@ public class VisionKangaroo {
 		if (receivedString != null) {
 			String[] splitReceivedString = receivedString.split(";");
 			if (splitReceivedString.length == 5) {
-				ComputedPosition = Boolean.parseBoolean(splitReceivedString[0]);
-				DetectedTwoCentroids = Boolean.parseBoolean(splitReceivedString[1]);
-				Translation[0] = Integer.parseInt(splitReceivedString[2]);
-				Translation[1] = Integer.parseInt(splitReceivedString[3]);
-				Translation[2] = Integer.parseInt(splitReceivedString[4]);
+				try {
+					ComputedPosition = Boolean.parseBoolean(splitReceivedString[0]);
+					DetectedTwoCentroids = Boolean.parseBoolean(splitReceivedString[1]);
+					Translation[0] = Double.parseDouble(splitReceivedString[2]);
+					Translation[1] = Double.parseDouble(splitReceivedString[3]);
+					Translation[2] = Double.parseDouble(splitReceivedString[4]);
+				}
+				catch (Exception e)
+				{
+					DriverStation.reportError(
+							String.format("Problem parsing serial received string: %s"),
+							true
+							);
+				}
 			}
 			else {
 				DriverStation.reportError("Didn't receive correct info from VisionKangaroo", false);
