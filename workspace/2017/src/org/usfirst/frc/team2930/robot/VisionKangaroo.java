@@ -37,7 +37,7 @@ public class VisionKangaroo {
 				catch (Exception e)
 				{
 					DriverStation.reportError(
-							String.format("Problem parsing serial received string: %s"),
+							String.format("Problem parsing serial received string: %s", e.getMessage()),
 							true
 							);
 				}
